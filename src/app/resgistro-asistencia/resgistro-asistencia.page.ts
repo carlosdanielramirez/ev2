@@ -8,12 +8,16 @@ import { AlertController } from '@ionic/angular';
 })
 export class ResgistroAsistenciaPage{
 
-  mostrarQR: boolean = false;
+  segment = 'scan';
+  asign = [
+    { nombre: "Programacion", qrText: 'Alumno Presente en Programacion' },
+    { nombre: "Ingles", qrText: 'Alumno Presente en Ingles' },
+    { nombre: "Calidad de Software", qrText: 'Alumno Presente en Calidad de Software' },
+    { nombre: "Arquitectura", qrText: 'Alumno Presente en Arquitectura' },
+    { nombre: "Estadistica Descriptiva", qrText: 'Alumno Presente en Estadistica Descriptiva' }
+  ];
 
   constructor() { }
 
 
-  registrarAsistencia() {
-    this.mostrarQR = true;
-  }
 }

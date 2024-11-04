@@ -23,26 +23,26 @@ export class CrudService {
   private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient, private router: Router) { }
-//para iniciar sesion 
+//para iniciar sesion
   verificarCredenciales(username: string, password: string) {
     return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios`).pipe(
       map(usuarios => {
-        const usuarioEncontrado = usuarios.find(u => 
-        
-          u.username === username && 
+        const usuarioEncontrado = usuarios.find(u =>
+
+          u.username === username &&
           u.password === password
         );
         if (usuarioEncontrado) {
           // Guardar datos del usuario en localStorage
           this.guardarDatosUsuario(usuarioEncontrado);
         }
-        
+
         return usuarioEncontrado;
       })
     );
   }
 
-  // Métodos básicos para localStorage
+  // metodos basicos para localStorage
   async guardar(id: string, valor: []) {
     localStorage.setItem(id, JSON.stringify(valor));
   }
@@ -76,8 +76,8 @@ export class CrudService {
 
   verificarContraseña(username: string, password: string): Observable<Usuario | undefined> {
     return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios`).pipe(
-      map(usuarios => usuarios.find(u => 
-        u.username === username && 
+      map(usuarios => usuarios.find(u =>
+        u.username === username &&
         u.password === password
       ))
     );
@@ -90,12 +90,12 @@ export class CrudService {
         if (!usuario) {
           throw new Error('Usuario no encontrado');
         }
-        const usuarioActualizado = { 
-          ...usuario, 
-          password: nuevaContraseña 
+        const usuarioActualizado = {
+          ...usuario,
+          password: nuevaContraseña
         };
         return this.http.put<Usuario>(
-          `${this.apiUrl}/usuarios/${userId}`, 
+          `${this.apiUrl}/usuarios/${userId}`,
           usuarioActualizado
         );
       })

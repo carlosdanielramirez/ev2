@@ -1,15 +1,33 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>qrdocente</ion-title>
+    <ion-title style="color: darkorange;">Registro de Asistencia</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">qrdocente</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding ion-text-center">
+
+    <ion-accordion-group>
+      <ion-accordion *ngFor="let asignatura of asign">
+        <ion-item slot="header" color="light">
+          <ion-label class="progra"> {{ asignatura.nombre }} </ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <div id="qrImage">
+            <div class="d-flex-center">
+              <div class="d-flex-center qr-wrapper">
+                <qr-code [value]="asignatura.qrText"
+                  size="190"
+                  errorCorrectionLevel="M">
+                </qr-code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+
 </ion-content>
 
 

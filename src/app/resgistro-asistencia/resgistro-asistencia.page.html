@@ -5,15 +5,50 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <h2>Presiona el boton para Generar un codigo QR</h2>
+<ion-content class="ion-padding ion-text-center">
 
-  <ion-button expand="block" (click)="registrarAsistencia()" shape="round">
-    Desplegar QR
-  </ion-button>
+  <!---  SEGMENTOS -->
+<ion-segment [(ngModel)]="segment">
+  <ion-segment-button value="scan">
+    <ion-label>Scan QR</ion-label>
+  </ion-segment-button>
+
+  <ion-segment-button value="generate">
+    <ion-label>Generar QR</ion-label>
+  </ion-segment-button>
+</ion-segment>
 
 
-  <ion-img *ngIf="mostrarQR" src="assets/qrasistencia.png"></ion-img>
+  <!---  ESCANEAR EL QR -->
+<div *ngIf="segment === 'scan'">
+  este segmento es igual a escanear
+</div>
+
+  <!---  GENERAR EL QR -->
+<div class="segment" *ngIf="segment === 'generate'">
+  <div class="segment-content">
+    <ion-accordion-group>
+      <ion-accordion *ngFor="let asignatura of asign">
+        <ion-item slot="header" color="light">
+          <ion-label class="progra"> {{ asignatura.nombre }} </ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <div id="qrImage">
+            <div class="d-flex-center">
+              <div class="d-flex-center qr-wrapper">
+                <qr-code [value]="asignatura.qrText"
+                  size="190"
+                  errorCorrectionLevel="M">
+                </qr-code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+  </div>
+</div>
 
 </ion-content>
 
